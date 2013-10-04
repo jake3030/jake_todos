@@ -1,0 +1,17 @@
+<div class="view" data-id="<%- model.get("id") %>">
+  <span class="finished_at"><%- model.finished() ? "Finished " + moment(model.get("finished_at")).fromNow() : "" %></span>
+
+  <input class="toggle" type="checkbox" <%= model.finished() ? 'checked="checked"' : '' %> />
+  <label><%- model.get("title") %></label>
+  <% if (!model.finished()) { %>
+    <% if (_.isEmpty(model.get("due_on"))) { %>
+      <a class="due_on" title="add a due date to this task"></a>
+    <% } else { %>
+      <a class="due_on_text" title="click to change the due date for this task">due <%- moment(model.get("due_on")).fromNow() %></a>
+    <% } %>
+    <input class="due_on_input" type="text" />
+  <% } %>
+  <a class="destroy" title="delete this task"></a>
+  <a class="order" title="reorder task"></a>
+</div>
+<input class="edit" type="text" value="<%- model.get("title") %>" />

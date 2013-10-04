@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TodoToptal</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "jquery" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <%= flash_divs(:alert, :notice) %>
+
+
+<div  class="main_panel">
+  <%= yield %>
+</div>
+
+
+<div id="credits">
+  Designed by
+  <br />
+  <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+</div>
+<%= javascript_include_tag "application" %>
+<script type="text/javascript" charset="utf-8">
+  Globals.current_user = <%= current_user.to_json.html_safe %>
+</script>
+</body>
+</html>

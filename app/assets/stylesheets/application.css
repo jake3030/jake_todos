@@ -1,0 +1,431 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require_self
+*= require_tree .
+*/
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  background: #eeeeee;
+  color: #333333;
+  width: 520px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+.centered{
+  text-align: center;
+}
+
+.note{
+  font-size:12px;
+  color:#aaa;
+}
+
+#profile_container{
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  color: #555555;
+  background: #f4fce8;
+  border-top: 1px solid #ededed;
+  padding: 0 20px;
+  line-height: 37px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -ms-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 15px 15px;
+  width: 28%;
+  text-align: center;
+  position: absolute;
+  right: -60%;
+  box-shadow: 2px 2px 4px -2px rgba(0,0,0,0.27);
+  top:0;
+}
+#profile_container a{
+  color:#555555;
+  font-size:12px;
+  text-decoration: none;
+  margin-left:10px;
+}
+#profile_container a:hover{
+  color:#999;
+}
+
+
+.main_panel {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 40px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -ms-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+
+.main_panel h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 0 10px 0;
+}
+
+.main_panel input[type="text"], .main_panel input[type="password"], .main_panel input[type="email"] {
+  width: 466px;
+  font-size: 24px;
+  font-family: inherit;
+  line-height: 1.4em;
+  border: 0;
+  outline: none;
+  padding: 6px;
+  border: 1px solid #999999;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
+}
+
+.main_panel input::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+#main {
+  display: none;
+}
+
+#todo_list {
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+}
+
+#todo_list li {
+  padding: 18px 20px 18px 0;
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+}
+
+#todo_list li:last-child {
+  border-bottom: none;
+}
+
+#todo_list li.done label {
+  color: #777777;
+  text-decoration: line-through;
+}
+
+
+#todo_list .finished_at {
+  position: absolute;
+  right: -40%;
+  top: 20px;
+  display: none;
+  font-size:50%;
+  color:#aaa;
+  width:150px;
+}
+
+#todo_list li:hover .finished_at {
+  display: block;
+}
+
+#todo_list .destroy {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+  display: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: url("/assets/destroy.png") no-repeat;
+}
+
+#todo_list li:hover .destroy {
+  display: block;
+}
+
+#todo_list .destroy:hover {
+  background-position: 0 -20px;
+}
+
+#todo_list li .due_on_input{
+  opacity:0;
+  position: absolute;
+  right: 290px;
+  margin:0;
+  padding:0;
+  top: 40px;
+  width: 20px;
+  height: 5px;
+}
+
+#todo_list li .due_on_text{
+  font-size:55%;
+  color:#999;
+  position: absolute;
+  left: 25px;
+  bottom: 2px;
+}
+
+#todo_list li .due_on_text + .due_on_input{
+  left: 25px;
+  bottom:-5px;
+}
+
+#todo_list .due_on {
+  position: absolute;
+  right: 70px;
+  top: 20px;
+  display: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: url("/assets/calendar.png") no-repeat;
+}
+
+#todo_list li:hover .due_on {
+  display: block;
+}
+
+#todo_list .due_on:hover {
+  background-position: 0 -20px;
+}
+
+
+#todo_list .order {
+  position: absolute;
+  right: 2px;
+  top: 23px;
+  display: none;
+  cursor: pointer;
+  width: 18px;
+  height: 15px;
+  background: url("/assets/order.png") no-repeat;
+}
+
+#todo_list .order.up{
+  right: 50px;
+  background-position: -8px 0px;
+}
+#todo_list li:hover .order {
+  display: block;
+}
+
+#todo_list .order:hover {
+  background-position: 0 -16px;
+}
+#todo_list .order.up:hover{
+  background-position: -8px -20px;
+}
+
+
+#todo_list li.editing {
+  border-bottom: none;
+  margin-top: -1px;
+  padding: 0;
+}
+
+#todo_list li.editing:last-child {
+  margin-bottom: -1px;
+}
+
+#todo_list li.editing .edit {
+  display: block;
+  width: 444px;
+  padding: 13px 15px 14px 20px;
+  margin: 0;
+}
+
+#todo_list li.editing .view {
+  display: none;
+}
+
+#todo_list li .view label {
+  word-break: break-word;
+}
+
+#todo_list li .edit {
+  display: none;
+}
+
+#todo_app footer {
+  display: none;
+  margin: 0 -20px -20px -20px;
+  overflow: hidden;
+  color: #555555;
+  background: #f4fce8;
+  border-top: 1px solid #ededed;
+  padding: 0 20px;
+  line-height: 37px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -ms-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+
+#clear_completed {
+  float: right;
+  line-height: 20px;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.1);
+  color: #555555;
+  font-size: 11px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 0 10px 1px;
+  cursor: pointer;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  border-radius: 12px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0 0;
+}
+
+#clear_completed:hover {
+  background: rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0 0;
+  -ms-box-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0 0;
+  -o-box-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0 0;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0 0;
+}
+
+#clear_completed:active {
+  position: relative;
+  top: 1px;
+}
+
+#todo_count span {
+  font-weight: bold;
+}
+
+#instructions {
+  margin: 10px auto;
+  color: #777777;
+  text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+  text-align: center;
+}
+
+#instructions a {
+  color: #336699;
+}
+
+#credits {
+  margin: 30px auto;
+  color: #999;
+  text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+  text-align: center;
+}
+
+#credits a {
+  color: #888;
+}
+
+
+#devise_share_links{
+  text-align: center;
+  margin-top:25px;
+}
+
+#devise_share_links a{
+  display: inline-block;
+  padding: 4px 15px;
+  border-radius: 10px 10px;
+  background: #D2E4FA;
+  margin: 0px;
+  margin-right: 9px;
+  color: #0055bb;
+  font-size: 12px;
+}
+
+#devise_share_links a:hover{
+  background: #B0CDF0;
+  box-shadow: inset 1px 1px 5px 0px rgba(10, 10, 10, 0.15);
+}
+
+#error_explanation{
+  padding: 0px;
+  padding-bottom:10px;
+  width: 90%;
+  margin: 20px auto;
+  border-radius: 10px;
+  color: rgb(185, 9, 9);
+  background: rgb(255, 200, 200);
+  border: 1px solid rgb(241, 170, 170);
+}
+
+#error_explanation h2{
+  margin:0;
+  padding:0;
+  text-align: center;
+  font-size:16px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding:5px 0;
+  background: rgb(185, 9, 9);
+  color:#fefefe;
+}
+
+.field_with_errors{
+  margin:0;
+  padding:0;
+}
+.field_with_errors > label{
+  color: red;
+}
+.field_with_errors > input{
+  border: 1px solid red !important;
+}
+
+.flash{
+  padding: 10px 0;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: rgb(185, 9, 9);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+}
+.error, .alert{
+  background: rgb(255, 200, 200);
+  border: 1px solid rgb(241, 170, 170);
+}
+
+.notice{
+  background: rgb(236, 255, 231);
+  border: 1px solid rgb(167, 206, 156);
+  color: rgb(54, 173, 22);
+}

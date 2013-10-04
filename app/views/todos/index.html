@@ -1,0 +1,27 @@
+
+<div id="todo_app">
+
+  <header>
+    <h1>Todos</h1>
+    <input id="new-todo" type="text" placeholder="What needs to be done?">
+  </header>
+
+  <section id="main">
+    <input id="toggle-all" type="checkbox">
+    <label for="toggle-all">Mark all as complete</label>
+    <ul id="todo_list">
+
+    </ul>
+  </section>
+
+  <footer>
+    <a id="clear_completed">Clear completed</a>
+    <div id="todo_count"></div>
+  </footer>
+
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).on("todo_app:app_loaded", function() {
+    TodoToptal.Todos.reset(<%= @todos.to_json.html_safe %>);
+  });
+</script>
