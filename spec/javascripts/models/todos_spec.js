@@ -1,17 +1,5 @@
 describe('Todo Model', function() {
-  var MOCK_GET_DATA = {
-    "id": 4,
-    "title": "Tough Task",
-    "due_on": "2013-10-16T01:30:00.000Z",
-    "finished_at": "2013-10-04T02:53:39.000Z",
-    "order": 4,
-    "created_at": "2013-10-03T18:13:28.000Z",
-  }
 
-
-  var MOCK_POST_DATA = {
-    success: true
-  };
 
 
   it('should be able to create its application test objects', function() {
@@ -148,7 +136,7 @@ describe('TodoList Collection', function() {
   var todos
 
   beforeEach(function() {
-    todos = TodoToptal.Collection.Todos;
+    todos = TodoToptal.Todos;
     spyOn($, 'ajax').andCallFake(function(options) {
       options.success(TodoTestResponse);
     });

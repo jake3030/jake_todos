@@ -1,4 +1,4 @@
-  var TodoTestResponse = [{
+  var TodoTestResponse = _.sortBy([{
       "id": 4,
       "title": "Cool task",
       "user_id": 1,
@@ -58,4 +58,18 @@
       "created_at": "2013-10-04T02:50:17.000Z",
       "updated_at": "2013-10-04T02:50:22.000Z"
     }
-  ]
+  ], function(obj){ return obj["id"] })
+
+  var MOCK_GET_DATA = {
+    "id": 4,
+    "title": "Tough Task",
+    "due_on": "2013-10-16T01:30:00.000Z",
+    "finished_at": "2013-10-04T02:53:39.000Z",
+    "order": 4,
+    "created_at": "2013-10-03T18:13:28.000Z",
+  }
+
+
+  var MOCK_POST_DATA = {
+    success: true
+  };

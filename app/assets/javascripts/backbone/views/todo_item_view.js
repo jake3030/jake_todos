@@ -1,4 +1,4 @@
-var TodoItemView = Backbone.View.extend({
+TodoToptal.Views.TodoItemView = Backbone.View.extend({
 
   tagName:  "li",
   template: null,

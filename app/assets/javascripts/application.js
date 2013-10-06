@@ -16,10 +16,8 @@
 //= require lib/moment
 //= require lib/utils
 //= require lib/jquery.simple-dtpicker
-//= require underscore
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
+// require backbone_rails_sync
+// require backbone_datalink
 //= require backbone/todo_toptal
 //= require_tree ./backbone
 
@@ -34,7 +32,7 @@ Globals = {
 
 $(document).ready(function() {
   tpl.load_all_templates(function () {
-    App = new TodoAppView;
+    App = new TodoToptal.Views.TodoAppView;
     $(document).trigger("todo_app:app_loaded")
   })
 });

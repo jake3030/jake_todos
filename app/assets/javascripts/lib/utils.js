@@ -12,7 +12,7 @@ tpl = {
 
     var load_template = function (index) {
       var name = names[index];
-      $.get('/assets/tpl/' + name + '.html', function (data) {
+      $.get('/assets/backbone/templates/' + name + '.html', function (data) {
         that.templates[name] = data;
         index++;
         if (index < names.length) {

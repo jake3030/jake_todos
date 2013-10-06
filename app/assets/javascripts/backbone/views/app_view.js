@@ -1,4 +1,4 @@
-var TodoAppView = Backbone.View.extend({
+TodoToptal.Views.TodoAppView = Backbone.View.extend({
 
   el: $("#todo_app"),
 
@@ -30,7 +30,10 @@ var TodoAppView = Backbone.View.extend({
   render: function() {
     var finished = TodoToptal.Todos.finished().length;
     var remaining = TodoToptal.Todos.remaining().length;
-    this.$el.append(this.info_template({current_user: Globals.current_user}))
+    if (this.$el.find("#profile_container").length == 0) {
+      this.$el.append(this.info_template({current_user: Globals.current_user}))
+    };
+
     if (TodoToptal.Todos.length) {
       this.main.show();
       this.footer.show();
@@ -49,7 +52,7 @@ var TodoAppView = Backbone.View.extend({
   },
 
   add_one: function(todo) {
-    var view = new TodoItemView({model: todo});
+    var view = new TodoToptal.Views.TodoItemView({model: todo});
     this.$("#todo_list").append(view.render().el);
   },
 
