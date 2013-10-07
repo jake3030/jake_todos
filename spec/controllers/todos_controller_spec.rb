@@ -8,21 +8,74 @@ describe TodosController do
 
     context "valid CRUD operations" do
       describe "GET index" do
-        before(:each) do
-          @todo = FactoryGirl.create(:todo, :user_id => @user.id)
-          get :index, :api_key => @user.api_key, :format => "json"
+        describe "no sorting" do
+          before(:each) do
+            @todo = FactoryGirl.create(:todo, :user_id => @user.id)
+            get :index, :api_key => @user.api_key, :format => "json"
+          end
+
+          it "should be successful" do
+            expect(response.status).to eq(200)
+          end
+
+          it "assigns @todos" do
+            expect(assigns(:todos)).to eq([@todo])
+          end
+
+          it "renders json" do
+            response.body.should == @user.todos.to_json
+          end
         end
 
-        it "should be successful" do
-          expect(response.status).to eq(200)
-        end
+        describe "with sorting" do
+          context "by due_on" do
+            before(:each) do
+              @todos = FactoryGirl.create_list(:todo_with_due_date, 10, :user_id => @user.id)
+              get :index, :api_key => @user.api_key, :format => "json", :sort => "due_on"
+            end
 
-        it "assigns @todos" do
-          expect(assigns(:todos)).to eq([@todo])
-        end
+            it "should be successful" do
+              expect(response.status).to eq(200)
+            end
 
-        it "renders json" do
-          response.body.should == @user.todos.to_json
+            it "assigns @todos" do
+              expect(assigns(:todos)).not_to be_blank
+            end
+
+            it "sorts todos" do
+              assigns(:todos).map(&:due_on).map(&:to_s).should  == @todos.map(&:due_on).map(&:to_s).sort
+              assigns(:todos).map(&:due_on).map(&:to_s).should_not == @todos.map(&:due_on).map(&:to_s)
+            end
+
+            it "renders json" do
+              parsed_body.should_not be_blank
+            end
+          end
+
+          context "by order" do
+            before(:each) do
+              @todos = FactoryGirl.create_list(:todo, 10, :user_id => @user.id)
+              get :index, :api_key => @user.api_key, :format => "json", :sort => "order"
+            end
+
+            it "should be successful" do
+              expect(response.status).to eq(200)
+            end
+
+            it "assigns @todos" do
+              expect(assigns(:todos)).not_to be_blank
+            end
+
+            it "sorts todos" do
+              assigns(:todos).map(&:order).should  == @todos.map(&:order).sort
+              assigns(:todos).map(&:order).should_not == @todos.map(&:order)
+            end
+
+            it "renders json" do
+              parsed_body.should_not be_blank
+            end
+          end
+
         end
 
       end
@@ -108,6 +161,30 @@ describe TodosController do
 
         it "deletes todo" do
           @user.todos.find_by_id(@todo.id).should be_blank
+        end
+      end
+
+
+      describe "mark_all_as_complete" do
+        before(:each) do
+          @todos = FactoryGirl.create_list(:todo, 10, :user_id => @user.id)
+          get :mark_all_as_complete, :api_key => @user.api_key, :format => "json"
+        end
+
+        it "should be successful" do
+          expect(response.status).to eq(200)
+        end
+
+        it "assigns @todos" do
+          expect(assigns(:todos)).to eq(@todos)
+        end
+
+        it "sets all todos to finished" do
+          expect(assigns(:todos).map(&:finished_at).all?).to eq(true)
+        end
+
+        it "renders json" do
+          response.body.should == @user.todos.to_json
         end
       end
 

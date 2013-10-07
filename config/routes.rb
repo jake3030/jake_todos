@@ -45,7 +45,11 @@ TodoToptal::Application.routes.draw do
 
   # Sample resource route within a namespace:
   scope "/api" do
-    resources :todos
+    resources :todos do
+      collection do
+        get 'mark_all_as_complete'
+      end
+    end
   end
 
   # You can have the root of your site routed with "root"

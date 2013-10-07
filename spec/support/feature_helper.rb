@@ -35,7 +35,6 @@ module FeatureHelper
       find(".view").hover
       find(".due_on").click
       expect(page).not_to have_selector '.due_on_text'
-      # debugger
       page.execute_script "$(\".datepicker_table tr td:contains('#{due_on.day}')\").click()"
       sleep 0.25
       find(".datepicker_timelist div:nth-of-type(6)").click

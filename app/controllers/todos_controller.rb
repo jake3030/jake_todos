@@ -3,7 +3,7 @@ class TodosController < ApplicationController
   before_filter :authenticate_token, :if => :has_api_key?
 
   def index
-    @todos = current_user.todos
+    @todos = current_user.todos.order("todos.#{todo_sort} ASC")
     respond_to do |wants|
       wants.json { render(:json => @todos) }
       wants.html
@@ -52,8 +52,24 @@ class TodosController < ApplicationController
     end
   end
 
+  def mark_all_as_complete
+    @todos = current_user.todos
+    @todos.update_all(:finished_at => Time.now)
+    respond_to do |wants|
+      wants.json { render(:json => @todos) }
+      wants.html
+    end
+  end
+
 
   private
+
+  def todo_sort
+    @sort = params.delete(:sort)
+    %w(order due_on).include?(@sort) ? @sort : "order"
+  end
+
+
   def todo_params
     params.require(:todo).permit(:title, :order, :finished_at, :due_on)
   end
