@@ -9,7 +9,9 @@
 * compiled file, but it's generally better to create a new file per style scope.
 *
 *= require_self
-*= require_tree .
+*= require_directory .
+*= require minimal/aero
+*= stub demo
 */
 
 
@@ -428,4 +430,20 @@ body {
   background: rgb(236, 255, 231);
   border: 1px solid rgb(167, 206, 156);
   color: rgb(54, 173, 22);
+}
+
+
+#controls{
+  position: relative;
+  margin:20px 0;
+  margin-bottom: 90px;
+}
+
+label[for='sort']{
+
+}
+
+
+.icon_priority{
+  background: url("/assets/drop_down_priority.png") no-repeat;
 }

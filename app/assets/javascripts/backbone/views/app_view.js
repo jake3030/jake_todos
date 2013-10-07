@@ -8,7 +8,8 @@ TodoToptal.Views.TodoAppView = Backbone.View.extend({
     "keypress #new-todo"    : "create_on_enter",
     "click #clear_completed": "clear_completed",
     "sortstop #todo_list"   : "reposition",
-    "click #toggle-all"     : "toggle_all_complete"
+    "click #toggle-all"     : "toggle_all_complete",
+    "change input[name='sort']"     : "sort"
   },
 
   initialize: function() {
@@ -19,6 +20,7 @@ TodoToptal.Views.TodoAppView = Backbone.View.extend({
     this.listenTo(TodoToptal.Todos, 'add', this.add_one);
     this.listenTo(TodoToptal.Todos, 'reset', this.add_all);
     this.listenTo(TodoToptal.Todos, 'all', this.render);
+    this.listenTo(TodoToptal.Todos, 'sort', this.refresh);
 
     this.footer = this.$('footer');
     this.main = $('#main');
@@ -49,6 +51,11 @@ TodoToptal.Views.TodoAppView = Backbone.View.extend({
     }
     $( "#todo_list" ).sortable({ handle: ".order" });
     $( "#todo_list" ).disableSelection();
+  },
+
+  refresh: function() {
+    this.$("#todo_list").html("");
+    this.add_all()
   },
 
   add_one: function(todo) {
@@ -89,6 +96,17 @@ TodoToptal.Views.TodoAppView = Backbone.View.extend({
 
   toggle_mark_all_label: function () {
     this.mark_all_label.text("Mark all as " + (this.all_checkbox.checked ? "incomplete" : "complete"));
+  },
+
+  sort: function (e, opt) {
+    console.log(arguments)
+    key = $(opt).data("value")
+    console.log("key", key)
+    if (key == -1) { return false };
+    TodoToptal.Todos.comparator = function( model ) {
+      return key == "due_on" ? new Date(model.get(key)) : model.get( key )
+    }
+    TodoToptal.Todos.sort()
   }
 
 });

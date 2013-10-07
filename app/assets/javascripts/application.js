@@ -16,6 +16,9 @@
 //= require lib/moment
 //= require lib/utils
 //= require lib/jquery.simple-dtpicker
+//= require lib/jquery.dropdown
+//= require lib/jquery.icheck
+//= require lib/modernizr.custom.63321
 // require backbone_rails_sync
 // require backbone_datalink
 //= require backbone/todo_toptal

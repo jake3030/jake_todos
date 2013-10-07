@@ -17,11 +17,17 @@ TodoToptal.Models.Todo = Backbone.Model.extend({
   },
 
   set_as_finished: function() {
-    this.save({finished_at: moment()}, {patch:true});
+    if (!this.finished()) {
+      this.save({finished_at: moment()}, {patch:true});
+    };
+
   },
 
   set_as_unfinished: function() {
-    this.save({finished_at: null}, {patch:true});
+    if (this.finished()) {
+      this.save({finished_at: null}, {patch:true});
+    };
+
   },
 });
 

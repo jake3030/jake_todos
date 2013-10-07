@@ -7,8 +7,16 @@
   </header>
 
   <section id="main">
-    <input id="toggle-all" type="checkbox">
-    <label for="toggle-all">Mark all as complete</label>
+    <div id="controls">
+      <input id="toggle-all" type="checkbox" />
+      <label for="toggle-all">Mark all as complete</label>
+
+      <select name="sort" id="sort">
+        <option class="sort_by" selected="selected" value="-1">Sort By</option>
+        <option class="icon-star" value="order">Priority</option>
+        <option class="icon-clock" value="due_on">Due Date</option>
+      </select>
+    </div>
     <ul id="todo_list">
 
     </ul>
@@ -23,5 +31,15 @@
 <script type="text/javascript" charset="utf-8">
   $(document).on("todo_app:app_loaded", function() {
     TodoToptal.Todos.reset(<%= @todos.to_json.html_safe %>);
+    $( '#sort' ).dropdown( {
+      gutter : 5,
+      stack : false,
+      delay : 100,
+      slidingIn : 100,
+      onOptionSelect: function(opt) {
+        console.log("opt", opt)
+        $("input[name='sort']").trigger("change", opt)
+      },
+    });
   });
 </script>

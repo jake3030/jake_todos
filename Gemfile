@@ -36,6 +36,8 @@ group :development, :test do
   gem "rspec-rails"
   gem "debugger",   :platforms => [:ruby_20]
   gem 'capybara'
+  gem "launchy"
+  gem 'selenium-webdriver'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
