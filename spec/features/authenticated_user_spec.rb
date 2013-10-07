@@ -73,6 +73,16 @@ feature "an authenticated user", %q{
     end
 
 
+    scenario "checks all as completed" do
+      create_new_task("a new task", Time.now + 10.days)
+      create_new_task("a newer task", Time.now + 5.days)
+      create_new_task("a new task 4", Time.now + 3.days)
+      find("#toggle-all").click
+      klasses = page.driver.find_css("#todo_list li").map {|t| t[:class]}
+      klasses.all? { |e| e == "done" }.should == true
+    end
+
+
   end
 
 

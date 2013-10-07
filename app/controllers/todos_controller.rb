@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
-  before_filter :authenticate_user!, :except => :has_api_key?
-  before_filter :authenticate_token, :only => :has_api_key?
+  before_filter :authenticate_user!, :unless => :has_api_key?
+  before_filter :authenticate_token, :if => :has_api_key?
 
   def index
     @todos = current_user.todos
@@ -11,7 +11,8 @@ class TodosController < ApplicationController
   end
 
   def show
-    @todo = current_user.todos.find(params[:id])
+    @todo = current_user.todos.find_by_id(params[:id])
+    raise "Task not found" if @todo.blank?
     respond_to do |wants|
       wants.json { render(:json => @todo) }
       wants.html
@@ -22,7 +23,7 @@ class TodosController < ApplicationController
     @todo = current_user.todos.build(todo_params)
     if @todo.save
       respond_to do |wants|
-        wants.json { render(:json => @todo) }
+        wants.json { render(:json => @todo.reload) }
         wants.html
       end
     else
@@ -31,7 +32,8 @@ class TodosController < ApplicationController
   end
 
   def update
-    @todo = current_user.todos.find(params[:id])
+    @todo = current_user.todos.find_by_id(params[:id])
+    raise "Task not found" if @todo.blank?
     if @todo.update_attributes(todo_params)
       respond_to do |wants|
         wants.json { render(:json => @todo) }
@@ -52,14 +54,6 @@ class TodosController < ApplicationController
 
 
   private
-  def has_api_key?
-    !params[:api_key].blank?
-  end
-
-  def authenticate_token
-    current_user = User.find_by_api_key(params[:api_key])
-  end
-
   def todo_params
     params.require(:todo).permit(:title, :order, :finished_at, :due_on)
   end

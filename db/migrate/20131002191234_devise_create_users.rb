@@ -23,7 +23,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
-
+      t.string   :api_key
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at
@@ -43,5 +43,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :reset_password_token, :unique => true
     # add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
+
+    User.reset_column_information
+    User.create(:email => "test@test.com", :first_name => "Johnny", :last_name => "Coolguy", :password => "test1234", :password_confirmation => "test1234") if Rails.env.development?
   end
 end
