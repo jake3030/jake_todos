@@ -48,6 +48,7 @@ TodoToptal::Application.routes.draw do
     resources :todos do
       collection do
         get 'mark_all_as_complete'
+        get 'mark_all_as_incomplete'
       end
     end
   end

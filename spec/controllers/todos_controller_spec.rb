@@ -165,7 +165,7 @@ describe TodosController do
       end
 
 
-      describe "mark_all_as_complete" do
+      describe "GET mark_all_as_complete" do
         before(:each) do
           @todos = FactoryGirl.create_list(:todo, 10, :user_id => @user.id)
           get :mark_all_as_complete, :api_key => @user.api_key, :format => "json"
@@ -181,6 +181,30 @@ describe TodosController do
 
         it "sets all todos to finished" do
           expect(assigns(:todos).map(&:finished_at).all?).to eq(true)
+        end
+
+        it "renders json" do
+          response.body.should == @user.todos.to_json
+        end
+      end
+
+
+      describe "GET mark_all_as_incomplete" do
+        before(:each) do
+          @todos = FactoryGirl.create_list(:todo, 10, :user_id => @user.id, :finished_at => Time.now)
+          get :mark_all_as_incomplete, :api_key => @user.api_key, :format => "json"
+        end
+
+        it "should be successful" do
+          expect(response.status).to eq(200)
+        end
+
+        it "assigns @todos" do
+          expect(assigns(:todos)).to eq(@todos)
+        end
+
+        it "sets all todos to not finished" do
+          expect(assigns(:todos).map(&:finished_at).all? { |e| e.blank?  }).to eq(true)
         end
 
         it "renders json" do

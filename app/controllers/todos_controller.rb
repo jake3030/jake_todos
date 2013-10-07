@@ -53,16 +53,24 @@ class TodosController < ApplicationController
   end
 
   def mark_all_as_complete
+    mark_as(:complete)
+  end
+
+  def mark_all_as_incomplete
+    mark_as(:incomplete)
+  end
+
+
+  private
+
+  def mark_as(finish_status)
     @todos = current_user.todos
-    @todos.update_all(:finished_at => Time.now)
+    @todos.update_all(:finished_at => finish_status == :complete ? Time.now : nil)
     respond_to do |wants|
       wants.json { render(:json => @todos) }
       wants.html
     end
   end
-
-
-  private
 
   def todo_sort
     @sort = params.delete(:sort)
